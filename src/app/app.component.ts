@@ -11,7 +11,13 @@ export class AppComponent {
   title = 'SportsStore';
   constructor(private repo: Reporsitory) {
   }
+
   get product(): Product {
     return this.repo.product;
   }
+  
+  get products(): Product[] {
+    return this.repo.products;
+  }
+
 }

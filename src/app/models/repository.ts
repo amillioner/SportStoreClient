@@ -1,8 +1,34 @@
 import { Product } from './product.model';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
+const productsUrl = "/api/products";
+
+@Injectable()
 export class Reporsitory {
-    constructor() {
-        this.product = JSON.parse(document.getElementById("data").textContent);
-    }
+
     product: Product;
+    products: Product[];
+
+    getProduct(id: number) {
+        this.http.get<Product>('${productsUrl}/${id}')
+            .subscribe(p => this.product = p);
+    }
+    getProducts(related = false) {
+        this.http.get<Product[]>('${productsUrl}?related=${related}')
+            .subscribe(prods => this.products = prods);
+    }
+
+    constructor(private http: HttpClient) {
+        this.getProducts(true);
+    }
+    // constructor() {
+    //     this.product = JSON.parse(document.getElementById("data").textContent);
+    // }
+    // product: Product;
+
+    // get product(): Product {
+    //     console.log("Product data received");
+    //     return this.productData;
+    // }
 }
