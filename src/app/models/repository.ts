@@ -10,17 +10,8 @@ export class Reporsitory {
     product: Product;
     products: Product[];
 
-    getProduct(id: number) {
-        this.http.get<Product>('${productsUrl}/${id}')
-            .subscribe(p => this.product = p);
-    }
-    getProducts(related = false) {
-        this.http.get<Product[]>('${productsUrl}?related=${related}')
-            .subscribe(prods => this.products = prods);
-    }
-
     constructor(private http: HttpClient) {
-        this.getProducts(true);
+        this.getProducts();
     }
     // constructor() {
     //     this.product = JSON.parse(document.getElementById("data").textContent);
@@ -31,4 +22,12 @@ export class Reporsitory {
     //     console.log("Product data received");
     //     return this.productData;
     // }
+    getProduct(id: number) {
+        this.http.get<Product>(`${productsUrl}/${id}`)
+            .subscribe(p => this.product = p);
+    }
+    getProducts(related = false) {
+        this.http.get<Product[]>(`${productsUrl}?related=${related}`)
+            .subscribe(prods => this.products = prods);
+    }
 }
