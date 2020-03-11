@@ -7,7 +7,7 @@ import { Supplier } from './supplier.model';
 const productsUrl = "/api/products";
 const supplierUrl = "/api/suppliers";
 
-type productMetadata = {
+type productsMetadata = {
     data: Product[],
     categories: string[],
 }
@@ -52,9 +52,10 @@ export class Repository {
         if (this.filter.search) {
             url += `&search=${this.filter.search}`;
         }
+        
         url += "&metadata=true";
 
-        this.http.get<productMetadata>(url)
+        this.http.get<productsMetadata>(url)
             .subscribe(md => {
                 this.products = md.data;
                 this.categories = md.categories;
