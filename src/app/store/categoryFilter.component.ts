@@ -2,9 +2,9 @@ import { Component } from "@angular/core";
 import { Repository } from '../models/repository';
 
 @Component({
-    selector: "store-cartsummary",
-    templateUrl: "cartSummary.component.html"
+    selector: "store-categoryfilter",
+    templateUrl: "categoryFilter.component.html"
 })
-export class CartSummaryComponent {
+export class CategoryFilterComponent {
     constructor(private repo: Repository) { }
 }
