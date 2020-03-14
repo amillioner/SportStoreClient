@@ -1,12 +1,21 @@
 import { Component } from "@angular/core";
-import { Repository } from '../models/repository';
+import { NavigationService } from '../models/navigation.service';
 
 @Component({
     selector: "store-pagination",
     templateUrl: "pagination.component.html",
 })
 export class PaginationComponent {
-    constructor(private repo: Repository) {
+    constructor(private navigation: NavigationService) {
+    }
 
+    get pages(): number[] {
+        if (this.navigation.productCount > 0) {
+            return Array(Math.ceil(this.navigation.productCount
+                / this.navigation.productsPerPage))
+                .fill(0).map((x, i) => i + 1);
+        } else {
+            return [];
+        }
     }
 }

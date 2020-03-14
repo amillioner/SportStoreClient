@@ -1,12 +1,27 @@
-import { Component } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { Repository } from '../models/repository';
+import { Product } from '../models/product.model';
 
 @Component({
     selector: "store-ratings",
-    templateUrl:"ratings.component.html",
+    templateUrl: "ratings.component.html",
 })
 export class RatingsComponent {
-    constructor(private repo: Repository){
+    constructor(private repo: Repository) {
 
+    }
+
+    @Input()
+    product: Product;
+
+    get stars(): boolean[] {
+        if (this.product != null && this.product.ratings != null) {
+            let total = this.product.ratings.map(r => r.stars)
+                .reduce((prev, cur) => prev + cur, 0);
+            let count = Math.round(total / this.product.ratings.length);
+            return Array(5).fill(false).map((value, index) => { return index < count });
+        } else {
+            return [];
+        }
     }
 }

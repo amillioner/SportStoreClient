@@ -1,7 +1,7 @@
 import { Product } from './product.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Filter } from './configClasses.repository';
+import { Filter, Pagination } from './configClasses.repository';
 import { Supplier } from './supplier.model';
 
 const productsUrl = "/api/products";
@@ -20,6 +20,7 @@ export class Repository {
     suppliers: Supplier[] = [];
     filter: Filter = new Filter();
     categories: string[] = [];
+    paginationObject = new Pagination();
 
     constructor(private http: HttpClient) {
         // this.filter.category = "soccer";
