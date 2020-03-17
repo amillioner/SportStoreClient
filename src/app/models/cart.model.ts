@@ -1,6 +1,4 @@
 import { Injectable } from "@angular/core";
-import { ProductSelectionComponent } from '../store/productSelection.component';
-import { stringify } from 'querystring';
 import { Product } from './product.model';
 
 @Injectable()
@@ -10,7 +8,7 @@ export class Cart {
     totalPrice: number = 0;
 
     addProduct(product: Product) {
-        let selection = this.selections.find(ps => ps.productId = product.productId);
+        let selection = this.selections.find(ps => ps.productId == product.productId);
         if (selection) {
             selection.quantity++;
         } else {
